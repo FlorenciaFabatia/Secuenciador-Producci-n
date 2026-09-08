@@ -1,0 +1,14 @@
+require('dotenv').config();
+const express=require('express');const cors=require('cors');
+const productoRoutes=require('./routes/productoRoutes');
+const ordenRoutes=require('./routes/ordenRoutes');
+const maquinaRoutes = require('./routes/maquinaRoutes');
+const app=express();const PORT=process.env.PORT||3000;
+const authRoutes = require('./routes/authRoutes');
+app.use(cors());app.use(express.json());
+app.get('/',(req,res)=>res.json({mensaje:'API del Secuenciador de Producción funcionando'}));
+app.use('/productos',productoRoutes);
+app.use("/api/ordenes", ordenRoutes);
+app.use('/api/maquinas', maquinaRoutes);
+app.use('/api/auth', authRoutes);
+app.listen(PORT,()=>console.log(`Servidor en http://localhost:${PORT}`));
